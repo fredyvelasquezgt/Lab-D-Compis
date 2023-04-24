@@ -1,0 +1,30 @@
+(* Lexer para Gramática No. 4 *)
+
+(* Introducir cualquier header aqui *)
+
+let digit = [0-9]
+let letter = [a-zA-Z]
+let whitespace = [ \t\n\r]
+let alphanumeric = letter | digit
+
+(* Definición del punto de entrada y reglas *)
+rule lexer [input] =
+  'if'        { IF }
+  | 'else'      { ELSE }
+  | 'while'     { WHILE }
+  | 'do'        { DO }
+  | 'for'       { FOR }
+  | 'int'       { INT }
+  | 'float'     { FLOAT }
+  | 'double'    { DOUBLE }
+  | 'char'      { CHAR }
+  | 'bool'      { BOOL }
+  | 'true'      { TRUE }
+  | 'false'     { FALSE }
+  | '='     { EQUAL }
+  | digit+ '.' digit+ { FLOATCONST }
+  | digit+         { INTCONST }
+  | letter (alphanumeric|'_')* { IDENT }
+  | whitespace     { skip }
+
+(* Introducir cualquier trailer aqui *)
